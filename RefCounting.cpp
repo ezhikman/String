@@ -9,7 +9,7 @@ RefCounting::RefCounting()
 RefCounting::RefCounting(char* chp)
 {
 	str = new char[strlen(chp)+1];
-	memcpy(str,chp,strlen(chp)+1);
+	memcpy(str,chp,strlen(chp));
 	ref_count = 1;
 }
 

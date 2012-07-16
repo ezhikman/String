@@ -1,5 +1,5 @@
-#ifndef  STRING_H
-#define STRING_H
+//#ifndef	STRING_H
+//#define STRING_H
 
 #pragma once
 
@@ -14,6 +14,8 @@ class String
 
 public:
 
+	friend class SubString;
+
 	String();
 	String(String&);
 	String(char*);
@@ -21,11 +23,11 @@ public:
 
 	void AllocRef();
 
-	SubString& substr(int dest,int shift);
+	SubString* substr(int dest,int shift);
 
 	int Size();
 
-	friend String& operator+(const String&,const String&);
+	friend String* operator+(const String&,const String&);
 
 	String& operator+=(const String&);
 	String& operator=(const String&);
@@ -46,4 +48,4 @@ public:
 	~String();
 };
 
-#endif
+//#endif

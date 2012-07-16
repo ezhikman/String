@@ -1,5 +1,5 @@
-#ifndef SUBSTRING_H
-#define SUBSTRING_H
+//#ifndef SUBSTRING_H
+//#define SUBSTRING_H
 
 #pragma once
 #include"String.h"
@@ -14,9 +14,8 @@ public:
 	SubString(int d,int s,String* st):dest(d),shift(s),str_parent(st){};
 
 	SubString& operator=(char*);
-	SubString& operator=(char);
-
+	SubString& operator=(const String*);
 	friend class String;
 };
 
-#endif
+//#endif

@@ -1,5 +1,5 @@
-#ifndef REF_COUNTING_H
-#define REF_COUNTING_H
+//#ifndef REF_COUNTING_H
+//#define REF_COUNTING_H
 
 #pragma once
 
@@ -12,6 +12,9 @@ class RefCounting
 	int ref_count;
 public:
 
+	friend class String;
+	friend class SubString;
+
 	RefCounting();
 	RefCounting(char);
 	RefCounting(char*);
@@ -19,9 +22,19 @@ public:
 	void ref_inc();
 	void ref_dec();
 
-	~RefCounting();
+	friend String* operator+(const String&,const String&);
 
-	friend class String;
+	friend bool operator==(const String& l_val,const String& r_val);
+	friend bool operator!=(const String&,const String&);
+	friend bool operator<=(const String&,const String&);
+	friend bool operator>=(const String&,const String&);
+	friend bool operator<(const String&,const String&);
+	friend bool operator>(const String&,const String&);
+
+	friend std::ostream& operator<<(std::ostream&,const String&);
+	friend std::istream& operator>>(std::istream&,const String&);
+
+	~RefCounting();
 };
 
-#endif
+//#endif
