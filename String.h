@@ -4,9 +4,9 @@
 #pragma once
 
 #include<iostream>
-#include<vector>
-#include"RefCounting.h"
-#include"SubString.h"
+
+class RefCounting;
+class SubString;
 
 class String 
 {
@@ -27,7 +27,7 @@ public:
 
 	int Size();
 
-	friend String* operator+(const String&,const String&);
+	friend String& operator+(const String&,const String&);//
 
 	String& operator+=(const String&);
 	String& operator=(const String&);
@@ -46,6 +46,51 @@ public:
 	char* c_str();
 
 	~String();
+};
+
+class RefCounting
+{
+	char* str;
+	int ref_count;
+public:
+
+	friend class String;
+	friend class SubString;
+
+	RefCounting();
+	RefCounting(char);
+	RefCounting(char*);
+
+	void ref_inc();
+	void ref_dec();
+
+	friend String& operator+(const String&,const String&);
+
+	friend bool operator==(const String& l_val,const String& r_val);
+	friend bool operator!=(const String&,const String&);
+	friend bool operator<=(const String&,const String&);
+	friend bool operator>=(const String&,const String&);
+	friend bool operator<(const String&,const String&);
+	friend bool operator>(const String&,const String&);
+
+	friend std::ostream& operator<<(std::ostream&,const String&);
+	friend std::istream& operator>>(std::istream&,const String&);
+
+	~RefCounting();
+};
+
+class SubString
+{
+	String* str_parent;
+	int dest;
+	int shift;
+public:
+
+	SubString(int d,int s,String* st):dest(d),shift(s),str_parent(st){};
+
+	SubString& operator=(char*);
+	SubString& operator=(const String*);
+	friend class String;
 };
 
 //#endif
