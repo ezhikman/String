@@ -4,6 +4,7 @@
 #pragma once
 
 #include<iostream>
+#include<string.h>
 
 class RefCounting;
 class SubString;
@@ -23,7 +24,7 @@ public:
 
 	void AllocRef();
 
-	SubString* substr(int dest,int shift);
+	SubString& substr(int dest,int shift);
 
 	int Size();
 
@@ -31,6 +32,7 @@ public:
 
 	String& operator+=(const String&);
 	String& operator=(const String&);
+	String& operator=(const char*);
 
 	friend bool operator==(const String&,const String&);
 	friend bool operator!=(const String&,const String&);
@@ -60,6 +62,7 @@ public:
 	RefCounting();
 	RefCounting(char);
 	RefCounting(char*);
+	RefCounting(RefCounting&);
 
 	void ref_inc();
 	void ref_dec();
@@ -88,8 +91,9 @@ public:
 
 	SubString(int d,int s,String* st):dest(d),shift(s),str_parent(st){};
 
-	SubString& operator=(char*);
-	SubString& operator=(const String*);
+	SubString& operator=(const char*);
+	SubString& operator=(const String&);
+
 	friend class String;
 };
 
