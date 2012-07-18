@@ -33,6 +33,7 @@ public:
 	String& operator+=(const String&);
 	String& operator=(const String&);
 	String& operator=(const char*);
+	String& operator=(const char);
 
 	friend bool operator==(const String&,const String&);
 	friend bool operator!=(const String&,const String&);

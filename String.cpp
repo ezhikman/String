@@ -112,6 +112,22 @@ String& String::operator=(const char* chp)
 	return *this;
 }
 
+String& String::operator=(const char ch)
+{
+	if(this->refcount->str[0]==ch && this->refcount->str[1]=='\0')
+		return *this;
+
+	if(this->refcount->ref_count>1)
+		this->AllocRef();
+
+	delete[] this->refcount->str;
+	this->refcount->str = new char[2];
+	this->refcount->str[0] = ch;
+	this->refcount->str[1] = '\0';
+
+	return *this;
+}
+
 bool operator==(const String& l_val,const String& r_val)
 {
 	return ((strcmp(l_val.refcount->str,r_val.refcount->str)==0)?true:false);
